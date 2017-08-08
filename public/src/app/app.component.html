@@ -1,0 +1,8 @@
+<!-- <div>
+  <app-home (userJoined)="user($event)"  *ngIf="!currentUser"></app-home>
+  <header *ngIf="currentUser">
+    <app-nav (userLeft)="logOut()"></app-nav>
+  </header>
+  <app-dashboard *ngIf="currentUser" [user]="currentUser"></app-dashboard>
+</div> -->
+<router-outlet></router-outlet>

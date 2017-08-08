@@ -1,0 +1,5 @@
+<h2>Bucket Lists</h2>
+<form (submit)="onSubmit()" #userData="ngForm">
+  <label>Name:<input type="text" required minlength="1" name="name" [(ngModel)]="user.name" #name="ngModel"></label>
+  <button [disabled]="userData.invalid">Enter</button>
+</form>

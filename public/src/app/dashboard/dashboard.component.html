@@ -1,0 +1,38 @@
+<app-nav></app-nav>
+<div *ngIf="user !== null">
+  
+  <h2>Welcome, {{user.name}} </h2>
+
+  <form (submit)="onSubmit(formData)" #formData="ngForm">
+    <input type="text" placeholder="Title" name="title" [(ngModel)]="bucketItem.title" #title="ngModel" required minlength="5">
+    <p *ngIf="(title.touched) && title.errors">Must enter a title at least 5 characters long</p>
+    <input type="text" placeholder="Description" name="description" [(ngModel)]="bucketItem.description" #description="ngModel" required minlength="10">
+    <p *ngIf="(description.touched) && description.errors">Must enter a description at least 10 characters long</p>    
+    <label>Done:
+      <select name="done" [(ngModel)]="bucketItem.done" #done="ngModel">
+        <option value='true'>Yes</option>
+        <option value='false'>No</option>
+      </select>
+    </label>  
+    <select name="taggedUser" [(ngModel)]="bucketItem.taggedUser" #taggedUser="ngModel">
+      <ng-container *ngFor="let person of users">
+        <option *ngIf="user._id !== person._id " value="{{person._id}}">{{person.name}}</option>
+      </ng-container>
+    </select>
+    <button [disabled]="formData.invalid">Add to list</button>
+  </form>
+
+  <h4>Before I die I want to..</h4>
+  <form *ngFor="let item of bucketList">
+    <input (click)="select()" type="checkbox" value="{{item.id}}" [checked]="item.done">{{item.owner}} | {{item.title}} - {{item.description}} - {{item.createdAt|date:'longDate'}}<br>
+  </form>
+  <form *ngFor="let item of taggedList">
+    <input (click)="select()" type="checkbox" value="{{item.id}}" [checked]="item.done">{{item.owner}} | {{item.title}} - {{item.description}} - {{item.createdAt|date:'longDate'}}<br>
+  </form>
+  <h4>List of other users (Click to view profile):</h4>
+  <ul>
+    <li *ngFor="let user of users">
+      <a [routerLink]="['/user', user._id]">{{user.name}}</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,4 @@
+<h3>Bucket List</h3>   |
+<a [routerLink]="['/dashboard']"*ngIf="user !== null">Home</a>
+<a [routerLink]="['']" (click)='logout()'*ngIf="user !== null">Logout</a>
+<a [routerLink]="['']" *ngIf="user === null">Please Login</a>
